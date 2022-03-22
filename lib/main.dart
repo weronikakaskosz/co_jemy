@@ -1,3 +1,5 @@
+import 'package:co_jemy/app/home/home_page.dart';
+import 'package:co_jemy/app/login/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,18 +40,10 @@ class RootPage extends StatelessWidget {
         builder: (context, snapshot) {
           final user = snapshot.data;
           if (user == null) {
-            return const Scaffold(
-              body: Center(
-                child: Text('Jesteś niezalogowany'),
-              ),
-            );
+            return const LoginPage();
           }
 
-          return Scaffold(
-            body: Center(
-              child: Text('Jesteś zalogowany jako ${user.email}'),
-            ),
-          );
+          return HomePage(user: user);
         });
   }
 }
