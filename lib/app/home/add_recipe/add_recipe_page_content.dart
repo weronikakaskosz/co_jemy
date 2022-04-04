@@ -1,3 +1,5 @@
+import 'package:co_jemy/app/home/add_recipe/add_cake_recipe_page_tab.dart';
+import 'package:co_jemy/app/home/add_recipe/add_dinner_recipe_page_tab.dart';
 import 'package:flutter/material.dart';
 
 class AddRecipePageContent extends StatelessWidget {
@@ -25,82 +27,6 @@ class AddRecipePageContent extends StatelessWidget {
           AddCakeRecipePageTab(),
         ]),
       ),
-    );
-  }
-}
-
-class AddDinnerRecipePageTab extends StatelessWidget {
-  const AddDinnerRecipePageTab({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Nazwa',
-          ),
-        ),
-        TextField(
-          minLines: 4,
-          maxLines: 8,
-          keyboardType: TextInputType.multiline,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Składniki',
-          ),
-        ),
-        TextField(
-          minLines: 8,
-          maxLines: 12,
-          keyboardType: TextInputType.multiline,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Przepis',
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class AddCakeRecipePageTab extends StatelessWidget {
-  const AddCakeRecipePageTab({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Nazwa',
-          ),
-        ),
-        TextField(
-          minLines: 4,
-          maxLines: 8,
-          keyboardType: TextInputType.multiline,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Składniki',
-          ),
-        ),
-        TextField(
-          minLines: 8,
-          maxLines: 12,
-          keyboardType: TextInputType.multiline,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Przepis',
-          ),
-        ),
-      ],
     );
   }
 }
