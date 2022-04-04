@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingListPageContent extends StatelessWidget {
@@ -7,8 +8,57 @@ class ShoppingListPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Trzy'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Co potrzebujesz do przepisu?',
+        ),
+        centerTitle: true,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream:
+              FirebaseFirestore.instance.collection('categories').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Center(child: Text('Something went wrong'));
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: Text("Loading"));
+            }
+
+            final documents = snapshot.data!.docs;
+            return ListView(
+              children: [
+                for (final document in documents) ...[
+                  CategoryWidget(document['title']),
+                ],
+              ],
+            );
+          }),
+    );
+  }
+}
+
+class CategoryWidget extends StatelessWidget {
+  const CategoryWidget(
+    this.title, {
+    Key? key,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(10),
+      child: Text(title),
     );
   }
 }
