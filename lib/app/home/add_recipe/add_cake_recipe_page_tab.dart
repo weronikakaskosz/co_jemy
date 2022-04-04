@@ -67,16 +67,22 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
             ),
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            FirebaseFirestore.instance.collection('cake_recipes').add({
-              'name': cakeRecipeName,
-              'ingredients': ingredientsName,
-              'recipe': recipeName,
-            });
-          },
-          child: const Text(
-            'Zatwierdź',
+        Center(
+          child: ElevatedButton(
+            onPressed: cakeRecipeName.isEmpty ||
+                    ingredientsName.isEmpty ||
+                    recipeName.isEmpty
+                ? null
+                : () {
+                    FirebaseFirestore.instance.collection('cake_recipes').add({
+                      'name': cakeRecipeName,
+                      'ingredients': ingredientsName,
+                      'recipe': recipeName,
+                    });
+                  },
+            child: const Text(
+              'Zatwierdź',
+            ),
           ),
         ),
       ],

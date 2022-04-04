@@ -67,16 +67,24 @@ class _AddDinnerRecipePageTabState extends State<AddDinnerRecipePageTab> {
             ),
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            FirebaseFirestore.instance.collection('dinner_recipes').add({
-              'name': dinnerRecipeName,
-              'ingredients': ingredientsName,
-              'recipe': recipeName,
-            });
-          },
-          child: const Text(
-            'Zatwierdź',
+        Center(
+          child: ElevatedButton(
+            onPressed: dinnerRecipeName.isEmpty ||
+                    ingredientsName.isEmpty ||
+                    recipeName.isEmpty
+                ? null
+                : () {
+                    FirebaseFirestore.instance
+                        .collection('dinner_recipes')
+                        .add({
+                      'name': dinnerRecipeName,
+                      'ingredients': ingredientsName,
+                      'recipe': recipeName,
+                    });
+                  },
+            child: const Text(
+              'Zatwierdź',
+            ),
           ),
         ),
       ],
