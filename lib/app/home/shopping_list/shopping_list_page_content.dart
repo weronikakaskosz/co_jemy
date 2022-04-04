@@ -39,7 +39,18 @@ class ShoppingListPageContent extends StatelessWidget {
             return ListView(
               children: [
                 for (final document in documents) ...[
-                  CategoryWidget(document['title']),
+                  Dismissible(
+                    key: ValueKey(document.id),
+                    onDismissed: (_) {
+                      FirebaseFirestore.instance
+                          .collection('categories')
+                          .doc(document.id)
+                          .delete();
+                    },
+                    child: CategoryWidget(
+                      document['title'],
+                    ),
+                  ),
                 ],
               ],
             );
