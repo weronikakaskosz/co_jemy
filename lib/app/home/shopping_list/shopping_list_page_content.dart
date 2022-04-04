@@ -16,7 +16,11 @@ class ShoppingListPageContent extends StatelessWidget {
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          FirebaseFirestore.instance
+              .collection('categories')
+              .add({'title': 'Super kategoria'});
+        },
         child: const Icon(Icons.add),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
