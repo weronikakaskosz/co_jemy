@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingListPageContent extends StatelessWidget {
-  const ShoppingListPageContent({
+  ShoppingListPageContent({
     Key? key,
   }) : super(key: key);
+
+  final controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +19,10 @@ class ShoppingListPageContent extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          FirebaseFirestore.instance
-              .collection('categories')
-              .add({'title': 'Super kategoria'});
+          FirebaseFirestore.instance.collection('categories').add({
+            'title': controller.text,
+          });
+          controller.clear();
         },
         child: const Icon(Icons.add),
       ),
@@ -36,6 +39,7 @@ class ShoppingListPageContent extends StatelessWidget {
             }
 
             final documents = snapshot.data!.docs;
+
             return ListView(
               children: [
                 for (final document in documents) ...[
@@ -52,6 +56,9 @@ class ShoppingListPageContent extends StatelessWidget {
                     ),
                   ),
                 ],
+                TextField(
+                  controller: controller,
+                ),
               ],
             );
           }),

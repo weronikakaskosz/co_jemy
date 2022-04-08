@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
           return const AddRecipePageContent();
         }
         if (currentIndex == 2) {
-          return const ShoppingListPageContent();
+          return ShoppingListPageContent();
         }
         return MyAccountPageContent(email: widget.user.email);
       }),
