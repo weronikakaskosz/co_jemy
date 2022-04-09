@@ -1,5 +1,5 @@
-import 'package:co_jemy/app/home/add_recipe/add_cake_recipe_page_tab.dart';
-import 'package:co_jemy/app/home/add_recipe/add_dinner_recipe_page_tab.dart';
+import 'package:co_jemy/app/home/add_recipe/pages/add_cake_recipe_page_tab.dart';
+import 'package:co_jemy/app/home/add_recipe/pages/add_dinner_recipe_page_tab.dart';
 import 'package:flutter/material.dart';
 
 class AddRecipePageContent extends StatelessWidget {
