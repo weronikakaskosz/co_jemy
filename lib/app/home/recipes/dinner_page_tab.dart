@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:co_jemy/app/home/recipes/cubit/dinner_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DinnerPageTab extends StatelessWidget {
   const DinnerPageTab({
@@ -8,19 +9,23 @@ class DinnerPageTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream:
-            FirebaseFirestore.instance.collection('dinner_recipes').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Center(child: Text('Something went wrong'));
+    return BlocProvider(
+      create: (context) => DinnerCubit()..start(),
+      child: BlocBuilder<DinnerCubit, DinnerState>(
+        builder: (context, state) {
+          if (state.errorMessage.isNotEmpty) {
+            return Center(
+              child: Text(
+                'Something went wrong: ${state.errorMessage}',
+              ),
+            );
           }
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: Text("Loading"));
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
           }
 
-          final documents = snapshot.data!.docs;
+          final documents = state.documents;
 
           return ListView(
             children: [
@@ -42,6 +47,8 @@ class DinnerPageTab extends StatelessWidget {
               ],
             ],
           );
-        });
+        },
+      ),
+    );
   }
 }
