@@ -1,6 +1,12 @@
 part of 'add_dinner_recipe_cubit.dart';
 
 @immutable
-abstract class AddDinnerRecipeState {}
+class AddDinnerRecipeState {
+  final bool saved;
+  final String errorMessage;
 
-class AddDinnerRecipeInitial extends AddDinnerRecipeState {}
+  const AddDinnerRecipeState({
+    this.saved = true,
+    this.errorMessage = '',
+  });
+}
