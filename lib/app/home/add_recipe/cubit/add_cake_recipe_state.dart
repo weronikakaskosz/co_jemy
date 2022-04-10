@@ -1,6 +1,12 @@
 part of 'add_cake_recipe_cubit.dart';
 
 @immutable
-abstract class AddCakeRecipeState {}
+class AddCakeRecipeState {
+  final bool saved;
+  final String errorMessage;
 
-class AddCakeRecipeInitial extends AddCakeRecipeState {}
+  const AddCakeRecipeState({
+    this.saved = false,
+    this.errorMessage = '',
+  });
+}
