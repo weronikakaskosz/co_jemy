@@ -1,0 +1,109 @@
+import 'dart:async';
+import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+
+part 'shopping_list_state.dart';
+
+class ShoppingListCubit extends Cubit<ShoppingListState> {
+  ShoppingListCubit()
+      : super(
+          const ShoppingListState(
+              documents: [],
+              document: [],
+              errorMessage: '',
+              isLoading: false,
+              added: true),
+        );
+
+  StreamSubscription? _streamSubscription;
+
+  Future<void> start() async {
+    emit(
+      const ShoppingListState(
+        documents: [],
+        document: [],
+        errorMessage: '',
+        isLoading: true,
+        added: true,
+      ),
+    );
+
+    _streamSubscription =
+        FirebaseFirestore.instance.collection('categories').snapshots().listen(
+      (data) {
+        emit(
+          ShoppingListState(
+            documents: data.docs,
+            document: state.document,
+            isLoading: false,
+            errorMessage: '',
+            added: true,
+          ),
+        );
+      },
+    )..onError(
+            (error) {
+              emit(
+                ShoppingListState(
+                  documents: const [],
+                  document: const [],
+                  isLoading: false,
+                  errorMessage: error.toString(),
+                  added: true,
+                ),
+              );
+            },
+          );
+  }
+
+  Future<void> addCategory(TextEditingController controller) async {
+    try {
+      await FirebaseFirestore.instance.collection('categories').add(
+        {'title': controller.text},
+      );
+
+      emit(
+        ShoppingListState(
+          documents: state.documents,
+          document: state.document,
+          isLoading: false,
+          errorMessage: '',
+          added: true,
+        ),
+      );
+    } catch (error) {
+      emit(ShoppingListState(
+          documents: const [],
+          document: const [],
+          isLoading: false,
+          errorMessage: error.toString(),
+          added: true));
+    }
+  }
+
+  Future<void> removeCategory({required String documentID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('categories')
+          .doc(documentID)
+          .delete();
+    } catch (error) {
+      emit(
+        ShoppingListState(
+          documents: state.documents,
+          document: state.document,
+          isLoading: false,
+          errorMessage: '',
+          added: true,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<void> close() {
+    _streamSubscription?.cancel();
+    return super.close();
+  }
+}
