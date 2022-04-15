@@ -1,4 +1,4 @@
-import 'package:co_jemy/app/home/recipes/cubit/dinner_cubit.dart';
+import 'package:co_jemy/app/features/home/recipes/cubit/dinner_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

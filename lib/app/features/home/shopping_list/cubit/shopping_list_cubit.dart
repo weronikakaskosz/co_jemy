@@ -57,10 +57,10 @@ class ShoppingListCubit extends Cubit<ShoppingListState> {
           );
   }
 
-  Future<void> addCategory(TextEditingController controller) async {
+  Future<void> addCategory({required String categoryName}) async {
     try {
       await FirebaseFirestore.instance.collection('categories').add(
-        {'title': controller.text},
+        {'title': categoryName},
       );
 
       emit(

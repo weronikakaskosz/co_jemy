@@ -1,5 +1,5 @@
-import 'package:co_jemy/app/home/home_page.dart';
-import 'package:co_jemy/app/login/login_page.dart';
+import 'package:co_jemy/app/features/home/home_page.dart';
+import 'package:co_jemy/app/features/login/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

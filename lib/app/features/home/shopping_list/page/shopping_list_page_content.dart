@@ -1,4 +1,4 @@
-import 'package:co_jemy/app/home/shopping_list/cubit/shopping_list_cubit.dart';
+import 'package:co_jemy/app/features/home/shopping_list/cubit/shopping_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,7 +38,9 @@ class ShoppingListPageContent extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                context.read<ShoppingListCubit>().addCategory(controller);
+                context
+                    .read<ShoppingListCubit>()
+                    .addCategory(categoryName: controller.text);
 
                 controller.clear();
               },

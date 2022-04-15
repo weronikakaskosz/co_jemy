@@ -1,25 +1,25 @@
-import 'package:co_jemy/app/home/add_recipe/cubit/add_cake_recipe_cubit.dart';
+import 'package:co_jemy/app/features/home/add_recipe/cubit/add_dinner_recipe_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddCakeRecipePageTab extends StatefulWidget {
-  const AddCakeRecipePageTab({
+class AddDinnerRecipePageTab extends StatefulWidget {
+  const AddDinnerRecipePageTab({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AddCakeRecipePageTab> createState() => _AddCakeRecipePageTabState();
+  State<AddDinnerRecipePageTab> createState() => _AddDinnerRecipePageTabState();
 }
 
-class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
-  var cakeRecipeName = '';
+class _AddDinnerRecipePageTabState extends State<AddDinnerRecipePageTab> {
+  var dinnerRecipeName = '';
   var ingredientsName = '';
   var recipeName = '';
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddCakeRecipeCubit(),
+      create: (context) => AddDinnerRecipeCubit(),
       child: ListView(
         children: [
           Padding(
@@ -27,7 +27,7 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
             child: TextField(
               onChanged: (newValue) {
                 setState(() {
-                  cakeRecipeName = newValue;
+                  dinnerRecipeName = newValue;
                 });
               },
               decoration: const InputDecoration(
@@ -70,18 +70,20 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
               ),
             ),
           ),
-          BlocBuilder<AddCakeRecipeCubit, AddCakeRecipeState>(
+          BlocBuilder<AddDinnerRecipeCubit, AddDinnerRecipeState>(
             builder: (context, state) {
               return Center(
                 child: ElevatedButton(
-                  onPressed: cakeRecipeName.isEmpty ||
+                  onPressed: dinnerRecipeName.isEmpty ||
                           ingredientsName.isEmpty ||
                           recipeName.isEmpty
                       ? null
                       : () {
-                          context
-                              .read<AddCakeRecipeCubit>()
-                              .add(cakeRecipeName, ingredientsName, recipeName);
+                          context.read<AddDinnerRecipeCubit>().add(
+                                dinnerRecipeName,
+                                ingredientsName,
+                                recipeName,
+                              );
                         },
                   child: const Text(
                     'Zatwierdź',

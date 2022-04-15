@@ -1,7 +1,7 @@
-import 'package:co_jemy/app/home/add_recipe/pages/add_recipe_page_content.dart';
-import 'package:co_jemy/app/home/recipes/pages/recipes_page_content.dart';
-import 'package:co_jemy/app/home/my_account/my_account_page_content.dart';
-import 'package:co_jemy/app/home/shopping_list/page/shopping_list_page_content.dart';
+import 'package:co_jemy/app/features/home/add_recipe/pages/add_recipe_page_content.dart';
+import 'package:co_jemy/app/features/home/recipes/pages/recipes_page_content.dart';
+import 'package:co_jemy/app/features/home/my_account/my_account_page_content.dart';
+import 'package:co_jemy/app/features/home/shopping_list/page/shopping_list_page_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
