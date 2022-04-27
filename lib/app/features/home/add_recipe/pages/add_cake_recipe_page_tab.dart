@@ -44,8 +44,8 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
                   ingredientsName = newValue;
                 });
               },
-              minLines: 6,
-              maxLines: 6,
+              minLines: 3,
+              maxLines: 3,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),

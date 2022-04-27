@@ -30,6 +30,7 @@ class ShoppingListPageContent extends StatelessWidget {
           final documents = state.documents;
 
           return Scaffold(
+            backgroundColor: Colors.amberAccent,
             appBar: AppBar(
               title: const Text(
                 'Czego potrzebujesz do przepisu?',
@@ -61,8 +62,15 @@ class ShoppingListPageContent extends StatelessWidget {
                     ),
                   ),
                 ],
-                TextField(
-                  controller: controller,
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Składnik',
+                    ),
+                    controller: controller,
+                  ),
                 ),
               ],
             ),

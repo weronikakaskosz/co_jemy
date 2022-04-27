@@ -12,6 +12,7 @@ class AddRecipePageContent extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.amberAccent,
         appBar: AppBar(
           title: const Text('Jaki chcesz dodać przepis?'),
           centerTitle: true,
@@ -22,10 +23,12 @@ class AddRecipePageContent extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(children: [
-          AddDinnerRecipePageTab(),
-          AddCakeRecipePageTab(),
-        ]),
+        body: const TabBarView(
+          children: [
+            AddDinnerRecipePageTab(),
+            AddCakeRecipePageTab(),
+          ],
+        ),
       ),
     );
   }

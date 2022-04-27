@@ -12,6 +12,7 @@ class RecipesPageContent extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.amberAccent,
         appBar: AppBar(
           title: const Text('Co jemy?'),
           centerTitle: true,
@@ -22,11 +23,33 @@ class RecipesPageContent extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(children: [
-          DinnerPageTab(),
-          CakePageTab(),
-        ]),
+        body: const TabBarView(
+          children: [
+            DinnerPageTab(),
+            CakePageTab(),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class DinnerPageTab extends StatelessWidget {
+  const DinnerPageTab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Container(
+          color: Colors.blue,
+          padding: EdgeInsets.all(20),
+          margin: EdgeInsets.all(10),
+          child: Text('Jakiś tekst'),
+        ),
+      ],
     );
   }
 }

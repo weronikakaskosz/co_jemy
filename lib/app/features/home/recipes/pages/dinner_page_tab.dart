@@ -27,26 +27,30 @@ class DinnerPageTab extends StatelessWidget {
 
           final documents = state.documents;
 
-          return ListView(
-            children: [
-              for (final document in documents) ...[
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(document['name']),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(document['ingredients']),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(document['recipe']),
-                ),
-              ],
-            ],
-          );
+          return StreamBuilder<Object>(
+              stream: null,
+              builder: (context, snapshot) {
+                return ListView(
+                  children: [
+                    for (final document in documents) ...[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(document['name']),
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(document['ingredients']),
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(document['recipe']),
+                      ),
+                    ],
+                  ],
+                );
+              });
         },
       ),
     );
