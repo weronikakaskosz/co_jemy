@@ -15,44 +15,56 @@ class DinnerPageTab extends StatelessWidget {
         builder: (context, state) {
           if (state.errorMessage.isNotEmpty) {
             return Center(
-              child: Text(
-                'Something went wrong: ${state.errorMessage}',
-              ),
+              child: Text('Something went wrong: ${state.errorMessage}'),
             );
           }
 
           if (state.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
 
           final documents = state.documents;
 
-          return StreamBuilder<Object>(
-              stream: null,
-              builder: (context, snapshot) {
-                return ListView(
-                  children: [
-                    for (final document in documents) ...[
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(document['name']),
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(document['ingredients']),
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(document['recipe']),
-                      ),
-                    ],
-                  ],
-                );
-              });
+          return ListView(
+            children: [
+              for (final document in documents) ...[
+                Dismissible(
+                  key: ValueKey(document.id),
+                  onDismissed: (_) {
+                    context
+                        .read<DinnerCubit>()
+                        .removeDinner(documentID: document.id);
+                  },
+                  child: DinnerWidget(
+                    document['name'],
+                  ),
+                ),
+              ],
+            ],
+          );
         },
       ),
+    );
+  }
+}
+
+class DinnerWidget extends StatelessWidget {
+  const DinnerWidget(
+    this.title, {
+    Key? key,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(10),
+      child: Text(title),
     );
   }
 }

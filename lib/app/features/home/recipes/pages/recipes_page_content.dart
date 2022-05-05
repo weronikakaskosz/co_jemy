@@ -33,23 +33,3 @@ class RecipesPageContent extends StatelessWidget {
     );
   }
 }
-
-class DinnerPageTab extends StatelessWidget {
-  const DinnerPageTab({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
-          color: Colors.blue,
-          padding: EdgeInsets.all(20),
-          margin: EdgeInsets.all(10),
-          child: Text('Jakiś tekst'),
-        ),
-      ],
-    );
-  }
-}

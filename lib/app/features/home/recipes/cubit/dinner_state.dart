@@ -2,7 +2,7 @@ part of 'dinner_cubit.dart';
 
 @immutable
 class DinnerState {
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents;
+  final List<QueryDocumentSnapshot<Object?>> documents;
   final bool isLoading;
   final String errorMessage;
 

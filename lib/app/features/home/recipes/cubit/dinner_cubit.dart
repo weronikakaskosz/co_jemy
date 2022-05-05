@@ -51,6 +51,23 @@ class DinnerCubit extends Cubit<DinnerState> {
       });
   }
 
+  Future<void> removeDinner({required String documentID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('dinner_recipes')
+          .doc(documentID)
+          .delete();
+    } catch (error) {
+      emit(
+        DinnerState(
+          documents: state.documents,
+          isLoading: false,
+          errorMessage: '',
+        ),
+      );
+    }
+  }
+
   @override
   Future<void> close() {
     _streamSubscription?.cancel();
