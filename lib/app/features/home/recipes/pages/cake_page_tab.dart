@@ -30,25 +30,41 @@ class CakePageTab extends StatelessWidget {
           return ListView(
             children: [
               for (final document in documents) ...[
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(document['name']),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(document['ingredients']),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(document['recipe']),
+                Dismissible(
+                  key: ValueKey(document.id),
+                  onDismissed: (_) {
+                    context
+                        .read<CakeCubit>()
+                        .removeCake(documentID: document.id);
+                  },
+                  child: CakeWidget(
+                    document['name'],
+                  ),
                 ),
               ],
             ],
           );
         },
       ),
+    );
+  }
+}
+
+class CakeWidget extends StatelessWidget {
+  const CakeWidget(
+    this.name, {
+    Key? key,
+  }) : super(key: key);
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(10),
+      child: Text(name),
     );
   }
 }

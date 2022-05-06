@@ -51,6 +51,23 @@ class CakeCubit extends Cubit<CakeState> {
       });
   }
 
+  Future<void> removeCake({required String documentID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('cake_recipes')
+          .doc(documentID)
+          .delete();
+    } catch (error) {
+      emit(
+        CakeState(
+          documents: state.documents,
+          isLoading: false,
+          errorMessage: '',
+        ),
+      );
+    }
+  }
+
   @override
   Future<void> close() {
     _streamSubscription?.cancel();

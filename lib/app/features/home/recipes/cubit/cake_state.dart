@@ -2,7 +2,7 @@ part of 'cake_cubit.dart';
 
 @immutable
 class CakeState {
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents;
+  final List<QueryDocumentSnapshot<Object?>> documents;
   final bool isLoading;
   final String errorMessage;
 

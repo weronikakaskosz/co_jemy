@@ -52,11 +52,11 @@ class DinnerPageTab extends StatelessWidget {
 
 class DinnerWidget extends StatelessWidget {
   const DinnerWidget(
-    this.title, {
+    this.name, {
     Key? key,
   }) : super(key: key);
 
-  final String title;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class DinnerWidget extends StatelessWidget {
       color: Colors.blue,
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.all(10),
-      child: Text(title),
+      child: Text(name),
     );
   }
 }
