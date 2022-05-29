@@ -1,6 +1,7 @@
 import 'package:co_jemy/app/features/home/add_recipe/pages/add_cake_recipe_page_tab.dart';
 import 'package:co_jemy/app/features/home/add_recipe/pages/add_dinner_recipe_page_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddRecipePageContent extends StatelessWidget {
   const AddRecipePageContent({
@@ -12,14 +13,17 @@ class AddRecipePageContent extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Colors.amberAccent,
+        backgroundColor: const Color.fromARGB(255, 252, 239, 238),
         appBar: AppBar(
-          title: const Text('Jaki chcesz dodać przepis?'),
+          title: Text('Jaki chcesz dodać przepis?',
+              style: GoogleFonts.courgette(fontSize: 25)),
           centerTitle: true,
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
-              Tab(text: 'Przepis na Obiad'),
-              Tab(text: 'Przepis na Ciasto'),
+              Text('Przepis na Obiad',
+                  style: GoogleFonts.courgette(fontSize: 18)),
+              Text('Przepis na Ciasto',
+                  style: GoogleFonts.courgette(fontSize: 18)),
             ],
           ),
         ),

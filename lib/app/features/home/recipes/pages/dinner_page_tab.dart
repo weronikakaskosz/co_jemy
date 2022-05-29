@@ -1,6 +1,7 @@
 import 'package:co_jemy/app/features/home/recipes/cubit/dinner_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DinnerPageTab extends StatelessWidget {
   const DinnerPageTab({
@@ -61,10 +62,13 @@ class DinnerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color: const Color.fromARGB(255, 252, 205, 226),
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.all(10),
-      child: Text(name),
+      child: Text(
+        name,
+        style: GoogleFonts.courgette(fontSize: 20, color: Colors.pink),
+      ),
     );
   }
 }

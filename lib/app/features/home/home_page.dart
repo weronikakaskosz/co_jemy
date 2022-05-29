@@ -43,9 +43,12 @@ class _HomePageState extends State<HomePage> {
           });
         },
         type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color.fromARGB(255, 252, 239, 238),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.home), label: 'Strona główna'),
+            icon: Icon(Icons.home),
+            label: 'Strona główna',
+          ),
           BottomNavigationBarItem(
               icon: Icon(Icons.add), label: 'Dodaj przepis'),
           BottomNavigationBarItem(
