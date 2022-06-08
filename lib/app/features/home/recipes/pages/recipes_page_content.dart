@@ -22,8 +22,21 @@ class RecipesPageContent extends StatelessWidget {
           centerTitle: true,
           bottom: TabBar(
             tabs: [
-              Text('Obiad', style: GoogleFonts.courgette(fontSize: 20)),
-              Text('Ciasto', style: GoogleFonts.courgette(fontSize: 20)),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                child: Text(
+                  'Obiad',
+                  style: GoogleFonts.courgette(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              Text(
+                'Ciasto',
+                style: GoogleFonts.courgette(
+                  fontSize: 20,
+                ),
+              ),
             ],
           ),
         ),

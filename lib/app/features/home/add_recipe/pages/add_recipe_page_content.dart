@@ -20,10 +20,23 @@ class AddRecipePageContent extends StatelessWidget {
           centerTitle: true,
           bottom: TabBar(
             tabs: [
-              Text('Przepis na Obiad',
-                  style: GoogleFonts.courgette(fontSize: 18)),
-              Text('Przepis na Ciasto',
-                  style: GoogleFonts.courgette(fontSize: 18)),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 18,
+                ),
+                child: Text(
+                  'Na Obiad',
+                  style: GoogleFonts.courgette(
+                    fontSize: 19,
+                  ),
+                ),
+              ),
+              Text(
+                'Na Ciasto',
+                style: GoogleFonts.courgette(
+                  fontSize: 19,
+                ),
+              ),
             ],
           ),
         ),
