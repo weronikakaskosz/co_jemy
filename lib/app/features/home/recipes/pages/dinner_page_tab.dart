@@ -29,10 +29,24 @@ class DinnerPageTab extends StatelessWidget {
           final documents = state.documents;
 
           return ListView(
+            padding: const EdgeInsets.symmetric(
+              vertical: 15,
+              horizontal: 10,
+            ),
             children: [
               for (final document in documents) ...[
                 Dismissible(
                   key: ValueKey(document.id),
+                  background: const DecoratedBox(
+                    decoration: BoxDecoration(color: Colors.pink),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 35),
+                        child: Icon(Icons.delete),
+                      ),
+                    ),
+                  ),
                   onDismissed: (_) {
                     context
                         .read<DinnerCubit>()
@@ -62,6 +76,7 @@ class DinnerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.maxFinite,
       color: const Color.fromARGB(255, 252, 205, 226),
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.all(10),
