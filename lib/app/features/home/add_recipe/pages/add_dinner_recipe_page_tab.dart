@@ -32,7 +32,7 @@ class _AddDinnerRecipePageTabState extends State<AddDinnerRecipePageTab> {
               },
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Nazwa',
+                labelText: 'Nazwa',
               ),
             ),
           ),
@@ -44,12 +44,13 @@ class _AddDinnerRecipePageTabState extends State<AddDinnerRecipePageTab> {
                   ingredientsName = newValue;
                 });
               },
-              minLines: 6,
-              maxLines: 6,
+              minLines: 3,
+              maxLines: 3,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
+                alignLabelWithHint: true,
                 border: OutlineInputBorder(),
-                hintText: 'Składniki',
+                labelText: 'Składniki',
               ),
             ),
           ),
@@ -65,8 +66,9 @@ class _AddDinnerRecipePageTabState extends State<AddDinnerRecipePageTab> {
               maxLines: 9,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
+                alignLabelWithHint: true,
                 border: OutlineInputBorder(),
-                hintText: 'Przepis',
+                labelText: 'Przepis',
               ),
             ),
           ),

@@ -43,12 +43,21 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextField(
                       controller: widget.emailController,
-                      decoration: const InputDecoration(hintText: 'E-mail'),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'E-mail',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
                     ),
                     TextField(
                       controller: widget.passwordController,
                       obscureText: true,
-                      decoration: const InputDecoration(hintText: 'Hasło'),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Hasło',
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -97,8 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                             isCreatingAccount = true;
                           });
                         },
-                        child: Text('Utwórz konto',
-                            style: GoogleFonts.courgette(fontSize: 20)),
+                        child: const Text('Utwórz konto'),
                       ),
                     ],
                     if (isCreatingAccount == true) ...[

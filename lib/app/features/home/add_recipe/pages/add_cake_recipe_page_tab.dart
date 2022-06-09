@@ -32,7 +32,7 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
               },
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Nazwa',
+                labelText: 'Nazwa',
               ),
             ),
           ),
@@ -48,8 +48,9 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
               maxLines: 3,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
+                alignLabelWithHint: true,
                 border: OutlineInputBorder(),
-                hintText: 'Składniki',
+                labelText: 'Składniki',
               ),
             ),
           ),
@@ -65,8 +66,9 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
               maxLines: 9,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
+                alignLabelWithHint: true,
                 border: OutlineInputBorder(),
-                hintText: 'Przepis',
+                labelText: 'Przepis',
               ),
             ),
           ),
@@ -79,9 +81,11 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
                           recipeName.isEmpty
                       ? null
                       : () {
-                          context
-                              .read<AddCakeRecipeCubit>()
-                              .add(cakeRecipeName, ingredientsName, recipeName);
+                          context.read<AddCakeRecipeCubit>().add(
+                                cakeRecipeName,
+                                ingredientsName,
+                                recipeName,
+                              );
                         },
                   child: const Text(
                     'Zatwierdź',

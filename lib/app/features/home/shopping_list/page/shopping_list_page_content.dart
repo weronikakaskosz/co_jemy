@@ -67,7 +67,7 @@ class ShoppingListPageContent extends StatelessWidget {
                   child: TextField(
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Składnik',
+                      labelText: 'Składnik',
                     ),
                     controller: controller,
                   ),
