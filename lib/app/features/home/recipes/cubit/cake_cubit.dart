@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:co_jemy/models/cake_recipe_model.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -11,7 +12,7 @@ class CakeCubit extends Cubit<CakeState> {
   CakeCubit()
       : super(
           const CakeState(
-            documents: [],
+            recipes: [],
             errorMessage: '',
             isLoading: false,
           ),
@@ -22,7 +23,7 @@ class CakeCubit extends Cubit<CakeState> {
   Future<void> start() async {
     emit(
       const CakeState(
-        documents: [],
+        recipes: [],
         errorMessage: '',
         isLoading: true,
       ),
@@ -32,9 +33,17 @@ class CakeCubit extends Cubit<CakeState> {
         .collection('cake_recipes')
         .snapshots()
         .listen((data) {
+      final recipeModels = data.docs.map((doc) {
+        return CakeRecipeModel(
+          id: doc.id,
+          name: doc['name'],
+          ingredients: doc['ingredients'],
+          recipe: doc['recipe'],
+        );
+      }).toList();
       emit(
         CakeState(
-          documents: data.docs,
+          recipes: recipeModels,
           isLoading: false,
           errorMessage: '',
         ),
@@ -43,7 +52,7 @@ class CakeCubit extends Cubit<CakeState> {
       ..onError((error) {
         emit(
           CakeState(
-            documents: const [],
+            recipes: const [],
             isLoading: false,
             errorMessage: error.toString(),
           ),
@@ -60,7 +69,7 @@ class CakeCubit extends Cubit<CakeState> {
     } catch (error) {
       emit(
         CakeState(
-          documents: state.documents,
+          recipes: state.recipes,
           isLoading: false,
           errorMessage: '',
         ),

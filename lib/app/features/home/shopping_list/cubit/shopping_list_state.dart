@@ -9,10 +9,11 @@ class ShoppingListState {
   final String errorMessage;
   final bool added;
 
-  const ShoppingListState(
-      {required this.documents,
-      required this.document,
-      required this.isLoading,
-      required this.errorMessage,
-      required this.added});
+  const ShoppingListState({
+    required this.documents,
+    required this.document,
+    required this.isLoading,
+    required this.errorMessage,
+    required this.added,
+  });
 }

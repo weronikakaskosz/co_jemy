@@ -25,7 +25,7 @@ class CakePageTab extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final documents = state.documents;
+        final recipeModels = state.recipes;
 
         return ListView(
           padding: const EdgeInsets.symmetric(
@@ -33,9 +33,9 @@ class CakePageTab extends StatelessWidget {
             horizontal: 10,
           ),
           children: [
-            for (final document in documents) ...[
+            for (final recipeModel in recipeModels) ...[
               Dismissible(
-                key: ValueKey(document.id),
+                key: ValueKey(recipeModel.id),
                 background: const DecoratedBox(
                   decoration: BoxDecoration(color: Colors.pink),
                   child: Align(
@@ -47,10 +47,12 @@ class CakePageTab extends StatelessWidget {
                   ),
                 ),
                 onDismissed: (_) {
-                  context.read<CakeCubit>().removeCake(documentID: document.id);
+                  context
+                      .read<CakeCubit>()
+                      .removeCake(documentID: recipeModel.id);
                 },
                 child: CakeWidget(
-                  document['name'],
+                  recipeModel.name,
                 ),
               ),
             ],
