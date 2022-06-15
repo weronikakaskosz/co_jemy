@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:co_jemy/models/dinner_recipe_model.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -11,7 +12,7 @@ class DinnerCubit extends Cubit<DinnerState> {
   DinnerCubit()
       : super(
           const DinnerState(
-            documents: [],
+            recipes: [],
             errorMessage: '',
             isLoading: false,
           ),
@@ -22,7 +23,7 @@ class DinnerCubit extends Cubit<DinnerState> {
   Future<void> start() async {
     emit(
       const DinnerState(
-        documents: [],
+        recipes: [],
         errorMessage: '',
         isLoading: true,
       ),
@@ -32,9 +33,17 @@ class DinnerCubit extends Cubit<DinnerState> {
         .collection('dinner_recipes')
         .snapshots()
         .listen((data) {
+      final recipeModels = data.docs.map((doc) {
+        return DinnerRecipeModel(
+          id: doc.id,
+          name: doc['name'],
+          ingredients: doc['ingredients'],
+          recipe: doc['recipe'],
+        );
+      }).toList();
       emit(
         DinnerState(
-          documents: data.docs,
+          recipes: recipeModels,
           isLoading: false,
           errorMessage: '',
         ),
@@ -43,7 +52,7 @@ class DinnerCubit extends Cubit<DinnerState> {
       ..onError((error) {
         emit(
           DinnerState(
-            documents: const [],
+            recipes: const [],
             isLoading: false,
             errorMessage: error.toString(),
           ),
@@ -60,7 +69,7 @@ class DinnerCubit extends Cubit<DinnerState> {
     } catch (error) {
       emit(
         DinnerState(
-          documents: state.documents,
+          recipes: state.recipes,
           isLoading: false,
           errorMessage: '',
         ),

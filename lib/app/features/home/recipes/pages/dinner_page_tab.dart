@@ -26,7 +26,7 @@ class DinnerPageTab extends StatelessWidget {
             );
           }
 
-          final documents = state.documents;
+          final recipeModels = state.recipes;
 
           return ListView(
             padding: const EdgeInsets.symmetric(
@@ -34,9 +34,9 @@ class DinnerPageTab extends StatelessWidget {
               horizontal: 10,
             ),
             children: [
-              for (final document in documents) ...[
+              for (final recipeModel in recipeModels) ...[
                 Dismissible(
-                  key: ValueKey(document.id),
+                  key: ValueKey(recipeModel.id),
                   background: const DecoratedBox(
                     decoration: BoxDecoration(color: Colors.pink),
                     child: Align(
@@ -50,10 +50,10 @@ class DinnerPageTab extends StatelessWidget {
                   onDismissed: (_) {
                     context
                         .read<DinnerCubit>()
-                        .removeDinner(documentID: document.id);
+                        .removeDinner(documentID: recipeModel.id);
                   },
                   child: DinnerWidget(
-                    document['name'],
+                    recipeModel.name,
                   ),
                 ),
               ],
