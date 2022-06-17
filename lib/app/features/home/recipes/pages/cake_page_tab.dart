@@ -1,4 +1,5 @@
 import 'package:co_jemy/app/features/home/recipes/cubit/cake_cubit.dart';
+import 'package:co_jemy/repositories/cake_recipes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,7 @@ class CakePageTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CakeCubit()..start(),
+      create: (context) => CakeCubit(CakeRecipesRepository())..start(),
       child: BlocBuilder<CakeCubit, CakeState>(builder: (context, state) {
         if (state.errorMessage.isNotEmpty) {
           return Center(

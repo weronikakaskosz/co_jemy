@@ -1,11 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:co_jemy/repositories/cake_recipes_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'add_cake_recipe_state.dart';
 
 class AddCakeRecipeCubit extends Cubit<AddCakeRecipeState> {
-  AddCakeRecipeCubit() : super(const AddCakeRecipeState());
+  AddCakeRecipeCubit(this._cakeRecipesRepository)
+      : super(const AddCakeRecipeState());
+
+  final CakeRecipesRepository _cakeRecipesRepository;
 
   Future<void> add(
     String name,
@@ -13,13 +16,7 @@ class AddCakeRecipeCubit extends Cubit<AddCakeRecipeState> {
     String recipe,
   ) async {
     try {
-      await FirebaseFirestore.instance.collection('cake_recipes').add(
-        {
-          'name': name,
-          'ingredients': ingredients,
-          'recipe': recipe,
-        },
-      );
+      await _cakeRecipesRepository.add(name, ingredients, recipe);
       emit(const AddCakeRecipeState(saved: true));
     } catch (error) {
       emit(AddCakeRecipeState(errorMessage: error.toString()));

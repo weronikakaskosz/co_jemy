@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:co_jemy/models/cake_recipe_model.dart';
+import 'package:co_jemy/repositories/cake_recipes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 part 'cake_state.dart';
 
 class CakeCubit extends Cubit<CakeState> {
-  CakeCubit()
+  CakeCubit(this._cakeRecipesRepository)
       : super(
           const CakeState(
             recipes: [],
@@ -17,6 +17,8 @@ class CakeCubit extends Cubit<CakeState> {
             isLoading: false,
           ),
         );
+
+  final CakeRecipesRepository _cakeRecipesRepository;
 
   StreamSubscription? _streamSubscription;
 
@@ -29,27 +31,17 @@ class CakeCubit extends Cubit<CakeState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('cake_recipes')
-        .snapshots()
-        .listen((data) {
-      final recipeModels = data.docs.map((doc) {
-        return CakeRecipeModel(
-          id: doc.id,
-          name: doc['name'],
-          ingredients: doc['ingredients'],
-          recipe: doc['recipe'],
+    _streamSubscription = _cakeRecipesRepository.getCakeRecipesStream().listen(
+      (data) {
+        emit(
+          CakeState(
+            recipes: data,
+            isLoading: false,
+            errorMessage: '',
+          ),
         );
-      }).toList();
-      emit(
-        CakeState(
-          recipes: recipeModels,
-          isLoading: false,
-          errorMessage: '',
-        ),
-      );
-    })
-      ..onError((error) {
+      },
+    )..onError((error) {
         emit(
           CakeState(
             recipes: const [],
@@ -62,10 +54,7 @@ class CakeCubit extends Cubit<CakeState> {
 
   Future<void> removeCake({required String documentID}) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('cake_recipes')
-          .doc(documentID)
-          .delete();
+      await _cakeRecipesRepository.delete(id: documentID);
     } catch (error) {
       emit(
         CakeState(
