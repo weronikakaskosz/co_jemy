@@ -1,4 +1,5 @@
 import 'package:co_jemy/app/features/home/add_recipe/cubit/add_dinner_recipe_cubit.dart';
+import 'package:co_jemy/repositories/dinner_recipes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +20,7 @@ class _AddDinnerRecipePageTabState extends State<AddDinnerRecipePageTab> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddDinnerRecipeCubit(),
+      create: (context) => AddDinnerRecipeCubit(DinnerRecipesRepository()),
       child: ListView(
         children: [
           Padding(

@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:co_jemy/models/dinner_recipe_model.dart';
+import 'package:co_jemy/repositories/dinner_recipes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 part 'dinner_state.dart';
 
 class DinnerCubit extends Cubit<DinnerState> {
-  DinnerCubit()
+  DinnerCubit(this._dinnerRecipesRepository)
       : super(
           const DinnerState(
             recipes: [],
@@ -17,6 +17,8 @@ class DinnerCubit extends Cubit<DinnerState> {
             isLoading: false,
           ),
         );
+
+  final DinnerRecipesRepository _dinnerRecipesRepository;
 
   StreamSubscription? _streamSubscription;
 
@@ -29,43 +31,30 @@ class DinnerCubit extends Cubit<DinnerState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('dinner_recipes')
-        .snapshots()
-        .listen((data) {
-      final recipeModels = data.docs.map((doc) {
-        return DinnerRecipeModel(
-          id: doc.id,
-          name: doc['name'],
-          ingredients: doc['ingredients'],
-          recipe: doc['recipe'],
-        );
-      }).toList();
+    _streamSubscription =
+        _dinnerRecipesRepository.getDinnerRecipesStream().listen((data) {
       emit(
         DinnerState(
-          recipes: recipeModels,
+          recipes: data,
           isLoading: false,
           errorMessage: '',
         ),
       );
     })
-      ..onError((error) {
-        emit(
-          DinnerState(
-            recipes: const [],
-            isLoading: false,
-            errorMessage: error.toString(),
-          ),
-        );
-      });
+          ..onError((error) {
+            emit(
+              DinnerState(
+                recipes: const [],
+                isLoading: false,
+                errorMessage: error.toString(),
+              ),
+            );
+          });
   }
 
   Future<void> removeDinner({required String documentID}) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('dinner_recipes')
-          .doc(documentID)
-          .delete();
+      await _dinnerRecipesRepository.delete(id: documentID);
     } catch (error) {
       emit(
         DinnerState(

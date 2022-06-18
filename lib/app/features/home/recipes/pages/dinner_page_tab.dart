@@ -1,4 +1,5 @@
 import 'package:co_jemy/app/features/home/recipes/cubit/dinner_cubit.dart';
+import 'package:co_jemy/repositories/dinner_recipes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,7 @@ class DinnerPageTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DinnerCubit()..start(),
+      create: (context) => DinnerCubit(DinnerRecipesRepository())..start(),
       child: BlocBuilder<DinnerCubit, DinnerState>(
         builder: (context, state) {
           if (state.errorMessage.isNotEmpty) {
