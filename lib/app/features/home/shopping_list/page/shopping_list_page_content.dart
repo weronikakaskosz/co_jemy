@@ -1,4 +1,5 @@
 import 'package:co_jemy/app/features/home/shopping_list/cubit/shopping_list_cubit.dart';
+import 'package:co_jemy/repositories/shopping_list_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +14,7 @@ class ShoppingListPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ShoppingListCubit()..start(),
+      create: (context) => ShoppingListCubit(ShoppingListRepository())..start(),
       child: BlocBuilder<ShoppingListCubit, ShoppingListState>(
         builder: (context, state) {
           if (state.errorMessage.isNotEmpty) {

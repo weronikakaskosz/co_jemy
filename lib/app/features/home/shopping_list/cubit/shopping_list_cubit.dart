@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:co_jemy/models/shopping_list_model.dart';
+import 'package:co_jemy/repositories/shopping_list_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'shopping_list_state.dart';
 
 class ShoppingListCubit extends Cubit<ShoppingListState> {
-  ShoppingListCubit()
+  ShoppingListCubit(this._shoppingListRepository)
       : super(
           const ShoppingListState(
               documents: [],
@@ -16,6 +16,8 @@ class ShoppingListCubit extends Cubit<ShoppingListState> {
               isLoading: false,
               added: true),
         );
+
+  final ShoppingListRepository _shoppingListRepository;
 
   StreamSubscription? _streamSubscription;
 
@@ -31,19 +33,11 @@ class ShoppingListCubit extends Cubit<ShoppingListState> {
     );
 
     _streamSubscription =
-        FirebaseFirestore.instance.collection('categories').snapshots().listen(
+        _shoppingListRepository.getShoppingListStream().listen(
       (data) {
-        final shoppingListModels = data.docs.map(
-          (doc) {
-            return ShoppingListModel(
-              id: doc.id,
-              title: doc['title'],
-            );
-          },
-        ).toList();
         emit(
           ShoppingListState(
-            documents: shoppingListModels,
+            documents: data,
             document: state.document,
             isLoading: false,
             errorMessage: '',
@@ -66,10 +60,12 @@ class ShoppingListCubit extends Cubit<ShoppingListState> {
           );
   }
 
-  Future<void> addCategory({required String categoryName}) async {
+  Future<void> addCategory({
+    required String categoryName,
+  }) async {
     try {
-      await FirebaseFirestore.instance.collection('categories').add(
-        {'title': categoryName},
+      await _shoppingListRepository.addCategory(
+        categoryName: categoryName,
       );
 
       emit(
@@ -91,12 +87,11 @@ class ShoppingListCubit extends Cubit<ShoppingListState> {
     }
   }
 
-  Future<void> removeCategory({required String documentID}) async {
+  Future<void> removeCategory({
+    required String documentID,
+  }) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('categories')
-          .doc(documentID)
-          .delete();
+      await _shoppingListRepository.delete(id: documentID);
     } catch (error) {
       emit(
         ShoppingListState(
