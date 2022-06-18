@@ -28,7 +28,7 @@ class ShoppingListPageContent extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final documents = state.documents;
+          final shoppingListModels = state.documents;
 
           return Scaffold(
             backgroundColor: const Color.fromARGB(255, 252, 239, 238),
@@ -49,16 +49,16 @@ class ShoppingListPageContent extends StatelessWidget {
             ),
             body: ListView(
               children: [
-                for (final document in documents) ...[
+                for (final shoppingListModel in shoppingListModels) ...[
                   Dismissible(
-                    key: ValueKey(document.id),
+                    key: ValueKey(shoppingListModel.id),
                     onDismissed: (_) {
                       context
                           .read<ShoppingListCubit>()
-                          .removeCategory(documentID: document.id);
+                          .removeCategory(documentID: shoppingListModel.id);
                     },
                     child: CategoryWidget(
-                      document['title'],
+                      shoppingListModel.title,
                     ),
                   ),
                 ],

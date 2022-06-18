@@ -2,8 +2,8 @@ part of 'shopping_list_cubit.dart';
 
 @immutable
 class ShoppingListState {
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents;
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> document;
+  final List<ShoppingListModel> documents;
+  final List<ShoppingListModel> document;
 
   final bool isLoading;
   final String errorMessage;

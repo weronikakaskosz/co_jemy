@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:co_jemy/models/shopping_list_model.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'shopping_list_state.dart';
@@ -32,9 +33,17 @@ class ShoppingListCubit extends Cubit<ShoppingListState> {
     _streamSubscription =
         FirebaseFirestore.instance.collection('categories').snapshots().listen(
       (data) {
+        final shoppingListModels = data.docs.map(
+          (doc) {
+            return ShoppingListModel(
+              id: doc.id,
+              title: doc['title'],
+            );
+          },
+        ).toList();
         emit(
           ShoppingListState(
-            documents: data.docs,
+            documents: shoppingListModels,
             document: state.document,
             isLoading: false,
             errorMessage: '',
