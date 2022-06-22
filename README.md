@@ -1,16 +1,18 @@
-# co_jemy
+# Co jemy?
 
-A new Flutter project.
 
-## Getting Started
+Do you want to cook something and you don’t remember recipe?
 
-This project is a starting point for a Flutter application.
+Do you have to check it out in the Internet everytime?
 
-A few resources to get you started if this is your first Flutter project:
+Do you know it? I know it very well.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+That’s why I’m creating app where you can:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+✅ Put your recipes for dinner and cakes
+
+✅ Add you shopping list in another tab
+
+✅ Remove something from your list if you have it already
+
+The app will be your own repository with recipes and you will not have to search everytime in website :blush:
