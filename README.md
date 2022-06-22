@@ -9,7 +9,7 @@ Do you know it? I know it very well.
 
 That’s why I’m creating app where you can:
 
-✅ Put your recipes for dinner and cakes
+✅ Put your recipes for dinners and cakes
 
 ✅ Add you shopping list in another tab
 
