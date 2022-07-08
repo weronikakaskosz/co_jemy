@@ -29,6 +29,19 @@ class DinnerRecipesRepository {
         .delete();
   }
 
+  Future<DinnerRecipeModel> get({required String id}) async {
+    final doc = await FirebaseFirestore.instance
+        .collection('dinner_recipes')
+        .doc(id)
+        .get();
+    return DinnerRecipeModel(
+      id: doc.id,
+      name: doc['name'],
+      ingredients: doc['ingredients'],
+      recipe: doc['recipe'],
+    );
+  }
+
   Future<void> add(
     String name,
     String ingredients,

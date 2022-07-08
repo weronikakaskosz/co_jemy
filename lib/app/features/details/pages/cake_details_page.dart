@@ -28,7 +28,7 @@ class CakeDetailsPage extends StatelessWidget {
             horizontal: 10,
           ),
           children: [
-            DetailsWidget(
+            CakeWidget(
               cakeRecipeModel.name,
             ),
           ],
@@ -38,8 +38,8 @@ class CakeDetailsPage extends StatelessWidget {
   }
 }
 
-class DetailsWidget extends StatelessWidget {
-  const DetailsWidget(
+class CakeWidget extends StatelessWidget {
+  const CakeWidget(
     this.name, {
     Key? key,
   }) : super(key: key);

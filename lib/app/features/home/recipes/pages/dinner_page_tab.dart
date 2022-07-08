@@ -1,3 +1,4 @@
+import 'package:co_jemy/app/features/details/pages/dinner_details_page.dart';
 import 'package:co_jemy/app/features/home/recipes/cubit/dinner_cubit.dart';
 import 'package:co_jemy/repositories/dinner_recipes_repository.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class DinnerPageTab extends StatelessWidget {
             );
           }
 
-          final recipeModels = state.recipes;
+          final dinnerRecipeModels = state.recipes;
 
           return ListView(
             padding: const EdgeInsets.symmetric(
@@ -35,9 +36,9 @@ class DinnerPageTab extends StatelessWidget {
               horizontal: 10,
             ),
             children: [
-              for (final recipeModel in recipeModels) ...[
+              for (final dinnerRecipeModel in dinnerRecipeModels) ...[
                 Dismissible(
-                  key: ValueKey(recipeModel.id),
+                  key: ValueKey(dinnerRecipeModel.id),
                   background: const DecoratedBox(
                     decoration: BoxDecoration(color: Colors.pink),
                     child: Align(
@@ -51,10 +52,20 @@ class DinnerPageTab extends StatelessWidget {
                   onDismissed: (_) {
                     context
                         .read<DinnerCubit>()
-                        .removeDinner(documentID: recipeModel.id);
+                        .removeDinner(documentID: dinnerRecipeModel.id);
                   },
-                  child: DinnerWidget(
-                    recipeModel.name,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DinnerDetailsPage(id: dinnerRecipeModel.id),
+                        ),
+                      );
+                    },
+                    child: DinnerWidget(
+                      dinnerRecipeModel.name,
+                    ),
                   ),
                 ),
               ],

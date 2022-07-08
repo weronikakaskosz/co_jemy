@@ -24,7 +24,9 @@ class CakePageTab extends StatelessWidget {
         }
 
         if (state.isLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
 
         final cakeRecipeModels = state.recipes;
