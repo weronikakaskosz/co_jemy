@@ -1,4 +1,4 @@
-import 'package:co_jemy/app/features/details/pages/details_page.dart';
+import 'package:co_jemy/app/features/details/pages/cake_details_page.dart';
 import 'package:co_jemy/app/features/home/recipes/cubit/cake_cubit.dart';
 import 'package:co_jemy/repositories/cake_recipes_repository.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ class CakePageTab extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) =>
-                            DetailsPage(id: cakeRecipeModel.id),
+                            CakeDetailsPage(id: cakeRecipeModel.id),
                       ),
                     );
                   },

@@ -1,11 +1,11 @@
-import 'package:co_jemy/app/features/details/cubit/details_cubit.dart';
+import 'package:co_jemy/app/features/details/cubit/cake_details_cubit.dart';
 import 'package:co_jemy/repositories/cake_recipes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DetailsPage extends StatelessWidget {
-  const DetailsPage({Key? key, required this.id}) : super(key: key);
+class CakeDetailsPage extends StatelessWidget {
+  const CakeDetailsPage({Key? key, required this.id}) : super(key: key);
 
   final String id;
 
@@ -13,8 +13,9 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          DetailsCubit(CakeRecipesRepository())..getCakeRecipeWithID(id),
-      child: BlocBuilder<DetailsCubit, DetailsState>(builder: (context, state) {
+          CakeDetailsCubit(CakeRecipesRepository())..getCakeRecipeWithID(id),
+      child: BlocBuilder<CakeDetailsCubit, CakeDetailsState>(
+          builder: (context, state) {
         final cakeRecipeModel = state.cakeRecipeModel;
 
         if (cakeRecipeModel == null) {
