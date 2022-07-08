@@ -1,3 +1,4 @@
+import 'package:co_jemy/app/features/details/pages/details_page.dart';
 import 'package:co_jemy/app/features/home/recipes/cubit/cake_cubit.dart';
 import 'package:co_jemy/repositories/cake_recipes_repository.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class CakePageTab extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final recipeModels = state.recipes;
+        final cakeRecipeModels = state.recipes;
 
         return ListView(
           padding: const EdgeInsets.symmetric(
@@ -34,9 +35,9 @@ class CakePageTab extends StatelessWidget {
             horizontal: 10,
           ),
           children: [
-            for (final recipeModel in recipeModels) ...[
+            for (final cakeRecipeModel in cakeRecipeModels) ...[
               Dismissible(
-                key: ValueKey(recipeModel.id),
+                key: ValueKey(cakeRecipeModel.id),
                 background: const DecoratedBox(
                   decoration: BoxDecoration(color: Colors.pink),
                   child: Align(
@@ -50,10 +51,20 @@ class CakePageTab extends StatelessWidget {
                 onDismissed: (_) {
                   context
                       .read<CakeCubit>()
-                      .removeCake(documentID: recipeModel.id);
+                      .removeCake(documentID: cakeRecipeModel.id);
                 },
-                child: CakeWidget(
-                  recipeModel.name,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            DetailsPage(id: cakeRecipeModel.id),
+                      ),
+                    );
+                  },
+                  child: CakeWidget(
+                    cakeRecipeModel.name,
+                  ),
                 ),
               ),
             ],
