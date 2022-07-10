@@ -30,6 +30,8 @@ class DinnerDetailsPage extends StatelessWidget {
             children: [
               DinnerWidget(
                 dinnerRecipeModel.name,
+                dinnerRecipeModel.ingredients,
+                dinnerRecipeModel.recipe,
               ),
             ],
           );
@@ -41,23 +43,51 @@ class DinnerDetailsPage extends StatelessWidget {
 
 class DinnerWidget extends StatelessWidget {
   const DinnerWidget(
-    this.name, {
+    this.name,
+    this.ingredients,
+    this.recipe, {
     Key? key,
   }) : super(key: key);
 
   final String name;
+  final String ingredients;
+  final String recipe;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      color: const Color.fromARGB(255, 252, 205, 226),
-      padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.all(10),
-      child: Text(
-        name,
-        style: GoogleFonts.courgette(fontSize: 20, color: Colors.pink),
-      ),
+    return Column(
+      children: [
+        Container(
+          width: double.maxFinite,
+          color: const Color.fromARGB(255, 252, 205, 226),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(10),
+          child: Text(
+            name,
+            style: GoogleFonts.courgette(fontSize: 20, color: Colors.pink),
+          ),
+        ),
+        Container(
+          width: double.maxFinite,
+          color: const Color.fromARGB(255, 252, 205, 226),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(10),
+          child: Text(
+            ingredients,
+            style: GoogleFonts.courgette(fontSize: 20, color: Colors.pink),
+          ),
+        ),
+        Container(
+          width: double.maxFinite,
+          color: const Color.fromARGB(255, 252, 205, 226),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(10),
+          child: Text(
+            recipe,
+            style: GoogleFonts.courgette(fontSize: 20, color: Colors.pink),
+          ),
+        ),
+      ],
     );
   }
 }
