@@ -15,27 +15,31 @@ class CakeDetailsPage extends StatelessWidget {
       create: (context) =>
           CakeDetailsCubit(CakeRecipesRepository())..getCakeRecipeWithID(id),
       child: BlocBuilder<CakeDetailsCubit, CakeDetailsState>(
-          builder: (context, state) {
-        final cakeRecipeModel = state.cakeRecipeModel;
+        builder: (context, state) {
+          final cakeRecipeModel = state.cakeRecipeModel;
 
-        if (cakeRecipeModel == null) {
-          return const Center(child: CircularProgressIndicator());
-        }
+          if (cakeRecipeModel == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-        return ListView(
-          padding: const EdgeInsets.symmetric(
-            vertical: 15,
-            horizontal: 10,
-          ),
-          children: [
-            CakeWidget(
-              cakeRecipeModel.name,
-              cakeRecipeModel.ingredients,
-              cakeRecipeModel.recipe,
+          return Scaffold(
+            backgroundColor: const Color.fromARGB(255, 252, 239, 238),
+            body: ListView(
+              padding: const EdgeInsets.symmetric(
+                vertical: 15,
+                horizontal: 10,
+              ),
+              children: [
+                CakeWidget(
+                  cakeRecipeModel.name,
+                  cakeRecipeModel.ingredients,
+                  cakeRecipeModel.recipe,
+                ),
+              ],
             ),
-          ],
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }
