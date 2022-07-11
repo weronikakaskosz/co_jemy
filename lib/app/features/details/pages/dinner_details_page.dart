@@ -22,18 +22,21 @@ class DinnerDetailsPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
-          return ListView(
-            padding: const EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 10,
-            ),
-            children: [
-              DinnerWidget(
-                dinnerRecipeModel.name,
-                dinnerRecipeModel.ingredients,
-                dinnerRecipeModel.recipe,
+          return Scaffold(
+            backgroundColor: const Color.fromARGB(255, 252, 239, 238),
+            body: ListView(
+              padding: const EdgeInsets.symmetric(
+                vertical: 15,
+                horizontal: 10,
               ),
-            ],
+              children: [
+                DinnerWidget(
+                  dinnerRecipeModel.name,
+                  dinnerRecipeModel.ingredients,
+                  dinnerRecipeModel.recipe,
+                ),
+              ],
+            ),
           );
         },
       ),
