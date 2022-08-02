@@ -1,9 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:co_jemy/models/shopping_list_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ShoppingListRepository {
   Stream<List<ShoppingListModel>> getShoppingListStream() {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
         .collection('categories')
         .snapshots()
         .map((querySnapshot) {
@@ -19,12 +26,29 @@ class ShoppingListRepository {
   }
 
   Future<void> addCategory({required String categoryName}) async {
-    await FirebaseFirestore.instance.collection('categories').add(
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('categories')
+        .add(
       {'title': categoryName},
     );
   }
 
   Future<void> delete({required String id}) {
-    return FirebaseFirestore.instance.collection('categories').doc(id).delete();
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('categories')
+        .doc(id)
+        .delete();
   }
 }

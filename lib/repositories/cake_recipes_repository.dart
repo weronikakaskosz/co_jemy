@@ -1,9 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:co_jemy/models/cake_recipe_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CakeRecipesRepository {
   Stream<List<CakeRecipeModel>> getCakeRecipesStream() {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
         .collection('cake_recipes')
         .snapshots()
         .map(
@@ -23,14 +30,26 @@ class CakeRecipesRepository {
   }
 
   Future<void> delete({required String id}) {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
         .collection('cake_recipes')
         .doc(id)
         .delete();
   }
 
   Future<CakeRecipeModel> get({required String id}) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
     final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
         .collection('cake_recipes')
         .doc(id)
         .get();
@@ -47,7 +66,15 @@ class CakeRecipesRepository {
     String ingredients,
     String recipe,
   ) async {
-    await FirebaseFirestore.instance.collection('cake_recipes').add(
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('cake_recipes')
+        .add(
       {
         'name': name,
         'ingredients': ingredients,
