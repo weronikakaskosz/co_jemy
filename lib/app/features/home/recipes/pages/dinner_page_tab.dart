@@ -58,8 +58,11 @@ class DinnerPageTab extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              DinnerDetailsPage(id: dinnerRecipeModel.id),
+                          builder: (context) => DinnerDetailsPage(
+                            name: dinnerRecipeModel.name,
+                            ingredients: dinnerRecipeModel.ingredients,
+                            recipe: dinnerRecipeModel.recipe,
+                          ),
                         ),
                       );
                     },

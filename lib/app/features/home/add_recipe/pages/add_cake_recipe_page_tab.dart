@@ -1,3 +1,4 @@
+import 'package:co_jemy/app/features/details/pages/cake_details_page.dart';
 import 'package:co_jemy/app/features/home/add_recipe/cubit/add_cake_recipe_cubit.dart';
 import 'package:co_jemy/repositories/cake_recipes_repository.dart';
 import 'package:flutter/material.dart';
@@ -77,9 +78,7 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
             builder: (context, state) {
               return Center(
                 child: ElevatedButton(
-                  onPressed: cakeRecipeName.isEmpty ||
-                          ingredientsName.isEmpty ||
-                          recipeName.isEmpty
+                  onPressed: cakeRecipeName.isEmpty || ingredientsName.isEmpty || recipeName.isEmpty
                       ? null
                       : () {
                           context.read<AddCakeRecipeCubit>().add(
@@ -87,6 +86,15 @@ class _AddCakeRecipePageTabState extends State<AddCakeRecipePageTab> {
                                 ingredientsName,
                                 recipeName,
                               );
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: ((_) => CakeDetailsPage(
+                                    name: recipeName,
+                                    ingredients: ingredientsName,
+                                    recipe: cakeRecipeName,
+                                  )),
+                            ),
+                          );
                         },
                   child: const Text(
                     'Zatwierdź',

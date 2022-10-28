@@ -51,16 +51,17 @@ class CakePageTab extends StatelessWidget {
                   ),
                 ),
                 onDismissed: (_) {
-                  context
-                      .read<CakeCubit>()
-                      .removeCake(documentID: cakeRecipeModel.id);
+                  context.read<CakeCubit>().removeCake(documentID: cakeRecipeModel.id);
                 },
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) =>
-                            CakeDetailsPage(id: cakeRecipeModel.id),
+                        builder: (context) => CakeDetailsPage(
+                          name: cakeRecipeModel.name,
+                          ingredients: cakeRecipeModel.ingredients,
+                          recipe: cakeRecipeModel.recipe,
+                        ),
                       ),
                     );
                   },

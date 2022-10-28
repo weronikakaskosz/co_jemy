@@ -5,40 +5,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CakeDetailsPage extends StatelessWidget {
-  const CakeDetailsPage({Key? key, required this.id}) : super(key: key);
+  const CakeDetailsPage({Key? key, required this.name, required this.ingredients, required this.recipe})
+      : super(key: key);
 
-  final String id;
+  final String name;
+  final String ingredients;
+  final String recipe;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          CakeDetailsCubit(CakeRecipesRepository())..getCakeRecipeWithID(id),
-      child: BlocBuilder<CakeDetailsCubit, CakeDetailsState>(
-        builder: (context, state) {
-          final cakeRecipeModel = state.cakeRecipeModel;
-
-          if (cakeRecipeModel == null) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          return Scaffold(
-            backgroundColor: const Color.fromARGB(255, 252, 239, 238),
-            body: ListView(
-              padding: const EdgeInsets.symmetric(
-                vertical: 15,
-                horizontal: 10,
-              ),
-              children: [
-                CakeWidget(
-                  cakeRecipeModel.name,
-                  cakeRecipeModel.ingredients,
-                  cakeRecipeModel.recipe,
-                ),
-              ],
+      create: (context) => CakeDetailsCubit(CakeRecipesRepository()),
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 252, 239, 238),
+        body: ListView(
+          padding: const EdgeInsets.symmetric(
+            vertical: 15,
+            horizontal: 10,
+          ),
+          children: [
+            CakeWidget(
+              name,
+              ingredients,
+              recipe,
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

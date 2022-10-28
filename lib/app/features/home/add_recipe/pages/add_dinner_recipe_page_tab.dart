@@ -1,3 +1,4 @@
+import 'package:co_jemy/app/features/details/pages/dinner_details_page.dart';
 import 'package:co_jemy/app/features/home/add_recipe/cubit/add_dinner_recipe_cubit.dart';
 import 'package:co_jemy/repositories/dinner_recipes_repository.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +88,11 @@ class _AddDinnerRecipePageTabState extends State<AddDinnerRecipePageTab> {
                                 ingredientsName,
                                 recipeName,
                               );
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: ((_) => DinnerDetailsPage(
+                                  name: recipeName,
+                                  ingredients: ingredientsName,
+                                  recipe: dinnerRecipeName))));
                         },
                   child: const Text(
                     'Zatwierdź',
